@@ -38,6 +38,7 @@ import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DeviceControlsTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.InternetTile;
 import com.android.systemui.qs.tiles.LocationTile;
@@ -93,6 +94,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<DeviceControlsTile> mDeviceControlsTileProvider;
     private final Provider<AlarmTile> mAlarmTileProvider;
     private final Provider<QuickAccessWalletTile> mQuickAccessWalletTileProvider;
+    private final Provider<HeadsUpTile> mHeadsUpTileProvider;
     private final Provider<ScreenshotTile> mScreenshotTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
@@ -130,6 +132,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<DeviceControlsTile> deviceControlsTileProvider,
             Provider<AlarmTile> alarmTileProvider,
             Provider<QuickAccessWalletTile> quickAccessWalletTileProvider,
+            Provider<HeadsUpTile> headsUpTileProvider,
             Provider<ScreenshotTile> screenshotTileProvider) {
         mQsHostLazy = qsHostLazy;
         mCustomTileBuilderProvider = customTileBuilderProvider;
@@ -162,6 +165,7 @@ public class QSFactoryImpl implements QSFactory {
         mDeviceControlsTileProvider = deviceControlsTileProvider;
         mAlarmTileProvider = alarmTileProvider;
         mQuickAccessWalletTileProvider = quickAccessWalletTileProvider;
+        mHeadsUpTileProvider = headsUpTileProvider;
         mScreenshotTileProvider = screenshotTileProvider;
     }
 
@@ -232,6 +236,8 @@ public class QSFactoryImpl implements QSFactory {
             case "wallet":
                 return mQuickAccessWalletTileProvider.get();
             // Additional tiles.
+            case "heads_up":
+                return mHeadsUpTileProvider.get();
             case "screenshot":
                 return mScreenshotTileProvider.get();
         }
