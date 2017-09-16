@@ -7439,5 +7439,8 @@ message MetricsEvent {
     // Proton Settings constant
     PROTON = 1945;
 
+    // CustomSettings constant
+    CUSTOM_SETTINGS = 1999;
+
   }
 }
