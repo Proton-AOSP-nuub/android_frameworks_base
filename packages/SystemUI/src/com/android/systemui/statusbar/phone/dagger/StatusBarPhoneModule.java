@@ -246,7 +246,8 @@ public interface StatusBarPhoneModule {
             TunerService tunerService,
             DumpManager dumpManager,
             ActivityLaunchAnimator activityLaunchAnimator,
-            BurnInProtectionController burnInProtectionController) {
+            BurnInProtectionController burnInProtectionController,
+            @Main Handler refreshNavbarHandler) {
         return new StatusBar(
                 context,
                 notificationsController,
@@ -349,7 +350,8 @@ public interface StatusBarPhoneModule {
                 tunerService,
                 dumpManager,
                 activityLaunchAnimator,
-                burnInProtectionController
+                burnInProtectionController,
+                refreshNavbarHandler
         );
     }
 }
