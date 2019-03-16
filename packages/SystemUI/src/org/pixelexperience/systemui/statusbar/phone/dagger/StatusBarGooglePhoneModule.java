@@ -251,6 +251,7 @@ public interface StatusBarGooglePhoneModule {
             DumpManager dumpManager,
             ActivityLaunchAnimator activityLaunchAnimator,
             BurnInProtectionController burnInProtectionController,
+            @Main Handler refreshNavbarHandler,
             SmartSpaceController smartSpaceController,
             WallpaperNotifier wallpaperNotifier,
             Optional<ReverseChargingViewController> reverseChargingViewController,
@@ -279,7 +280,7 @@ public interface StatusBarGooglePhoneModule {
                 statusBarHideIconsForBouncerManager, lockscreenShadeTransitionController, featureFlags,
                 keyguardUnlockAnimationController, mainHandler, delayableExecutor, messageRouter, wallpaperManager,
                 unlockedScreenOffAnimationController, startingSurfaceOptional, tunerService, dumpManager, activityLaunchAnimator,
-                burnInProtectionController, smartSpaceController, wallpaperNotifier, reverseChargingViewController,
+                burnInProtectionController, refreshNavbarHandler, smartSpaceController, wallpaperNotifier, reverseChargingViewController,
                 notificationVoiceReplyClient);
     }
 }

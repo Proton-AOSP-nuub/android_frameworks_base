@@ -293,6 +293,7 @@ public class StatusBarGoogle extends StatusBar {
                            DumpManager dumpManager,
                            ActivityLaunchAnimator activityLaunchAnimator,
                            BurnInProtectionController burnInProtectionController,
+                           @Main Handler refreshNavbarHandler,
                            SmartSpaceController smartSpaceController,
                            WallpaperNotifier wallpaperNotifier,
                            Optional<ReverseChargingViewController> reverseChargingViewController,
@@ -320,7 +321,7 @@ public class StatusBarGoogle extends StatusBar {
                 statusBarHideIconsForBouncerManager, lockscreenShadeTransitionController, featureFlags,
                 keyguardUnlockAnimationController, mainHandler, delayableExecutor, messageRouter, wallpaperManager,
                 unlockedScreenOffAnimationController, startingSurfaceOptional, tunerService, dumpManager, activityLaunchAnimator,
-                burnInProtectionController);
+                burnInProtectionController, refreshNavbarHandler);
         mSmartSpaceController = smartSpaceController;
         mWallpaperNotifier = wallpaperNotifier;
         mReverseChargingViewController = reverseChargingViewController;

@@ -282,6 +282,8 @@ public class StatusBar extends SystemUI implements
 
     private static final String NAVIGATION_BAR_SHOW =
             "customsystem:" + Settings.System.NAVIGATION_BAR_SHOW;
+    private static final String DISPLAY_CUTOUT_HIDDEN =
+            "customsystem:" + Settings.System.DISPLAY_CUTOUT_HIDDEN;
 
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
@@ -703,6 +705,8 @@ public class StatusBar extends SystemUI implements
     private final ColorExtractor.OnColorsChangedListener mOnColorsChangedListener =
             (extractor, which) -> updateTheme();
 
+    private boolean mDisplayCutoutHidden;
+    private Handler mRefreshNavbarHandler;
 
     /**
      * Public constructor for StatusBar.
@@ -815,7 +819,8 @@ public class StatusBar extends SystemUI implements
             TunerService tunerService,
             DumpManager dumpManager,
             ActivityLaunchAnimator activityLaunchAnimator,
-            BurnInProtectionController burnInProtectionController) {
+            BurnInProtectionController burnInProtectionController,
+            @Main Handler refreshNavbarHandler) {
         super(context);
         mNotificationsController = notificationsController;
         mFragmentService = fragmentService;
@@ -917,6 +922,7 @@ public class StatusBar extends SystemUI implements
         mLockscreenShadeTransitionController = lockscreenShadeTransitionController;
         mStartingSurfaceOptional = startingSurfaceOptional;
         mBurnInProtectionController = burnInProtectionController;
+        mRefreshNavbarHandler = refreshNavbarHandler;
         lockscreenShadeTransitionController.setStatusbar(this);
 
         mPanelExpansionStateManager.addExpansionListener(this::onPanelExpansionChanged);
@@ -968,6 +974,7 @@ public class StatusBar extends SystemUI implements
                 SysuiStatusBarStateController.RANK_STATUS_BAR);
 
         mTunerService.addTunable(this, NAVIGATION_BAR_SHOW);
+        mTunerService.addTunable(this, DISPLAY_CUTOUT_HIDDEN);
 
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         mDreamManager = IDreamManager.Stub.asInterface(
@@ -1929,6 +1936,19 @@ public class StatusBar extends SystemUI implements
     private void moveClockToLeft() {
         Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.STATUS_BAR_CLOCK, 2);
+    }
+
+    private void updateCutoutOverlay(boolean displayCutoutHidden) {
+        boolean needsRefresh = mDisplayCutoutHidden != displayCutoutHidden;
+        mDisplayCutoutHidden = displayCutoutHidden;
+        try {
+            mOverlayManager.setEnabled("org.pixelexperience.overlay.hidecutout",
+                        mDisplayCutoutHidden, mLockscreenUserManager.getCurrentUserId());
+        } catch (RemoteException ignored) {
+        }
+        if (needsRefresh){
+            refreshNavbarOverlay();
+        }
     }
 
     /**
@@ -4256,6 +4276,23 @@ public class StatusBar extends SystemUI implements
         return navigationBarModeOverlay;
     }
 
+    private void refreshNavbarOverlay() {
+        final String overlayPackageName = "org.pixelexperience.overlay.dummycutout";
+        try{
+            mOverlayManager.setEnabled(overlayPackageName,
+                false, UserHandle.USER_CURRENT);
+        } catch (RemoteException ignored) {
+        }
+        mRefreshNavbarHandler.removeCallbacksAndMessages(null);
+        mRefreshNavbarHandler.postDelayed(() -> {
+            try{
+                mOverlayManager.setEnabled(overlayPackageName,
+                    true, UserHandle.USER_CURRENT);
+            } catch (RemoteException ignored) {
+            }
+        }, 1000);
+    }
+
     @Override
     public void onTuningChanged(String key, String newValue) {
         if (NAVIGATION_BAR_SHOW.equals(key) && mDisplayId == Display.DEFAULT_DISPLAY &&
@@ -4274,6 +4311,8 @@ public class StatusBar extends SystemUI implements
                     mNavigationBarController.onDisplayRemoved(mDisplayId);
                 }
             }
+        } else if (DISPLAY_CUTOUT_HIDDEN.equals(key)) {
+            updateCutoutOverlay(TunerService.parseIntegerSwitch(newValue, false));
         }
     }
     // End Extra BaseStatusBarMethods.
