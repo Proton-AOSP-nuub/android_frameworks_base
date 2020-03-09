@@ -1937,6 +1937,9 @@ public class StatusBar extends SystemUI implements
     private void updateCutoutOverlay(boolean displayCutoutHidden) {
         boolean needsRefresh = mDisplayCutoutHidden != displayCutoutHidden;
         mDisplayCutoutHidden = displayCutoutHidden;
+        if (!mDisplayCutoutHidden && CutoutUtils.hasCenteredCutout(mContext, true) && isCenteredClock()){
+            moveClockToLeft();
+        }
         try {
             mOverlayManager.setEnabled("org.pixelexperience.overlay.hidecutout",
                         mDisplayCutoutHidden, mLockscreenUserManager.getCurrentUserId());
