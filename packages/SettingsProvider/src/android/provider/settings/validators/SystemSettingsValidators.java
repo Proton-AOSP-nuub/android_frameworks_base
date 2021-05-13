@@ -206,5 +206,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.STATUS_BAR_AM_PM, new InclusiveIntegerRangeValidator(0, 2));
         VALIDATORS.put(System.STATUS_BAR_QUICK_QS_PULLDOWN, new InclusiveIntegerRangeValidator(0, 2));
         VALIDATORS.put(System.DOUBLE_TAP_SLEEP_GESTURE, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.AUTO_BRIGHTNESS_ONE_SHOT, BOOLEAN_VALIDATOR);
     }
 }
