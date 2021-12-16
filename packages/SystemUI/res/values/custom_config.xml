@@ -27,4 +27,8 @@
 
     <!-- Udfps vendor code -->
     <integer name="config_udfps_vendor_code">22</integer>
+
+    <!-- SystemUI Google -->
+    <bool name="flag_smartspace">true</bool>
+
 </resources>
