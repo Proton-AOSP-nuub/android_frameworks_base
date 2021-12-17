@@ -135,6 +135,7 @@ android_library {
         "assistmanager-google",
         "backgesture-google",
         "columbus-sysui-google",
+        "elmyra-sysui-google",
         "smartspace-google",
         "vendor-pixelatoms-java",
     ],

@@ -10,6 +10,7 @@ import com.android.systemui.dagger.SystemUIModule;
 import org.protonaosp.systemui.columbus.ColumbusModule;
 import org.protonaosp.systemui.keyguard.KeyguardSliceProviderProton;
 import org.protonaosp.systemui.smartspace.KeyguardSmartspaceController;
+import org.protonaosp.systemui.elmyra.ElmyraModule;
 
 import dagger.Subcomponent;
 
@@ -18,6 +19,7 @@ import dagger.Subcomponent;
         ColumbusModule.class,
         DefaultComponentBinder.class,
         DependencyProvider.class,
+        ElmyraModule.class,
         SystemUIModule.class,
         SystemUIProtonBinder.class,
         SystemUIProtonModule.class})
