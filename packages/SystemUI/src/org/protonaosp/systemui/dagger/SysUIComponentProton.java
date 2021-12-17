@@ -7,6 +7,7 @@ import com.android.systemui.dagger.SystemUIBinder;
 import com.android.systemui.dagger.SysUIComponent;
 import com.android.systemui.dagger.SystemUIModule;
 
+import org.protonaosp.systemui.columbus.ColumbusModule;
 import org.protonaosp.systemui.keyguard.KeyguardSliceProviderProton;
 import org.protonaosp.systemui.smartspace.KeyguardSmartspaceController;
 
@@ -14,10 +15,11 @@ import dagger.Subcomponent;
 
 @SysUISingleton
 @Subcomponent(modules = {
+        ColumbusModule.class,
         DefaultComponentBinder.class,
         DependencyProvider.class,
-        SystemUIBinder.class,
         SystemUIModule.class,
+        SystemUIProtonBinder.class,
         SystemUIProtonModule.class})
 public interface SysUIComponentProton extends SysUIComponent {
     @SysUISingleton

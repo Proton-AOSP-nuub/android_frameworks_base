@@ -86,10 +86,12 @@ android_library {
         },
     },
     resource_dirs: [
+        "res",
+        "res-assist",
+        "res-columbus",
         "res-product",
         "res-keyguard",
         "res-smartspace",
-        "res",
     ],
     static_libs: [
         "WindowManager-Shell",
@@ -130,8 +132,11 @@ android_library {
         "themelib",
         "//hardware/google/interfaces:com.google.hardware.pixel.display-V3-java",
         "faceunlock_framework",
+        "assistmanager-google",
         "backgesture-google",
+        "columbus-sysui-google",
         "smartspace-google",
+        "vendor-pixelatoms-java",
     ],
     manifest: "AndroidManifest.xml",
 
