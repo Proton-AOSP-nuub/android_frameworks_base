@@ -63,3 +63,7 @@
 -keep class vendor.** { *; }
 -keep class org.pixelexperience.** { *; }
 -keep class org.protonaosp.** { *; }
+
+# Google rules
+-keep class com.google.** { *; }
+-keep class vendor.** { *; }
