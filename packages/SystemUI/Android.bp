@@ -68,6 +68,11 @@ filegroup {
 
 android_library {
     name: "SystemUI-core",
+    aaptflags: [
+        "-0 .tflite",
+        "-0 .vocab",
+    ],
+    asset_dirs: ["assets"],
     srcs: [
         "src/**/*.kt",
         "src/**/*.java",
@@ -83,6 +88,7 @@ android_library {
     resource_dirs: [
         "res-product",
         "res-keyguard",
+        "res-smartspace",
         "res",
     ],
     static_libs: [
@@ -124,6 +130,8 @@ android_library {
         "themelib",
         "//hardware/google/interfaces:com.google.hardware.pixel.display-V3-java",
         "faceunlock_framework",
+        "backgesture-google",
+        "smartspace-google",
     ],
     manifest: "AndroidManifest.xml",
 
