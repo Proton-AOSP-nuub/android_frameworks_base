@@ -319,5 +319,6 @@ public class SecureSettingsValidators {
             }
             return true;
         });
+        VALIDATORS.put(Secure.SYSTEM_BLACK_THEME, BOOLEAN_VALIDATOR);
     }
 }
