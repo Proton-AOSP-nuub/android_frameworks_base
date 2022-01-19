@@ -29,6 +29,7 @@
         <permission name="android.permission.CONTROL_VPN"/>
         <permission name="android.permission.DUMP"/>
         <permission name="android.permission.GET_APP_OPS_STATS"/>
+        <permission name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
         <permission name="android.permission.INTERACT_ACROSS_USERS"/>
         <permission name="android.permission.MANAGE_DEBUGGING"/>
         <permission name="android.permission.MANAGE_SENSOR_PRIVACY"/>
