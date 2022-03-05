@@ -30,6 +30,7 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Fragment;
 import android.database.ContentObserver;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
@@ -287,8 +288,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     @Override
     public void onTuningChanged(String key, String newValue) {
         boolean wasClockBlacklisted = mIsClockBlacklisted;
+        Context context = getContext();
+        if (context == null)
+            return;
         mIsClockBlacklisted = StatusBarIconController.getIconHideList(
-                getContext(), newValue).contains("clock");
+                context, newValue).contains("clock");
         if (wasClockBlacklisted && !mIsClockBlacklisted) {
             showClock(false);
         }
