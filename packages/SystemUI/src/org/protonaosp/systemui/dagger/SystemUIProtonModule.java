@@ -31,7 +31,7 @@ import com.google.android.systemui.smartspace.SmartSpaceController;
 
 import org.protonaosp.systemui.smartspace.KeyguardSmartspaceController;
 import org.protonaosp.systemui.ProtonServices;
-import com.octavi.android.systemui.assist.AssistManagerGoogle;
+import com.syberia.android.systemui.assist.AssistManagerGoogle;
 import org.protonaosp.systemui.smartspace.KeyguardSmartspaceController;
 
 import com.android.internal.logging.UiEventLogger;

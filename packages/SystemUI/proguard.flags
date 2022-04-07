@@ -58,7 +58,7 @@
 
 # Custom rules
 -keep class org.protonaosp.** { *; }
--keep class com.octavi.** { *; }
+-keep class com.syberia.** { *; }
 
 # Google rules
 -keep class android.hardware.** { *; }
