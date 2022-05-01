@@ -175,10 +175,9 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mMobile.setVisibility(mState.showTriangle ? View.VISIBLE : View.GONE);
         mMobileRoaming.setVisibility(mState.roaming ? View.VISIBLE : View.GONE);
         mMobileRoamingSpace.setVisibility(mState.roaming ? View.VISIBLE : View.GONE);
-        mIn.setVisibility(mState.activityIn ? View.VISIBLE : View.GONE);
-        mOut.setVisibility(mState.activityOut ? View.VISIBLE : View.GONE);
-        mInoutContainer.setVisibility((mState.activityIn || mState.activityOut)
-                ? View.VISIBLE : View.GONE);
+        mIn.setVisibility(View.GONE);
+        mOut.setVisibility(View.GONE);
+        mInoutContainer.setVisibility(View.GONE);
     }
 
     private boolean updateState(MobileIconState state) {
@@ -207,10 +206,9 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mMobile.setVisibility(state.showTriangle ? View.VISIBLE : View.GONE);
         mMobileRoaming.setVisibility(state.roaming ? View.VISIBLE : View.GONE);
         mMobileRoamingSpace.setVisibility(state.roaming ? View.VISIBLE : View.GONE);
-        mIn.setVisibility(state.activityIn ? View.VISIBLE : View.GONE);
-        mOut.setVisibility(state.activityOut ? View.VISIBLE : View.GONE);
-        mInoutContainer.setVisibility((state.activityIn || state.activityOut)
-                ? View.VISIBLE : View.GONE);
+        mIn.setVisibility(View.GONE);
+        mOut.setVisibility(View.GONE);
+        mInoutContainer.setVisibility(View.GONE);
 
         needsLayout |= state.roaming != mState.roaming
                 || state.activityIn != mState.activityIn
