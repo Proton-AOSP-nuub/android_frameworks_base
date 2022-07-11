@@ -39,6 +39,7 @@ import com.android.systemui.theme.ThemeOverlayApplier
 import com.android.systemui.theme.ThemeOverlayController
 import com.android.systemui.util.settings.SecureSettings
 import dev.kdrag0n.colorkt.Color
+import com.android.systemui.util.settings.SystemSettings
 import dev.kdrag0n.colorkt.cam.Zcam
 import dev.kdrag0n.colorkt.conversion.ConversionGraph.convert
 import dev.kdrag0n.colorkt.data.Illuminants
@@ -68,6 +69,7 @@ class CustomThemeOverlayController @Inject constructor(
     dumpManager: DumpManager,
     featureFlags: FeatureFlags,
     wakefulnessLifecycle: WakefulnessLifecycle,
+    systemSettings: SystemSettings,
 ) : ThemeOverlayController(
     context,
     broadcastDispatcher,
@@ -83,6 +85,7 @@ class CustomThemeOverlayController @Inject constructor(
     dumpManager,
     featureFlags,
     wakefulnessLifecycle,
+    systemSettings,
 ) {
     private val cond: Zcam.ViewingConditions
     private val targets: MaterialYouTargets
