@@ -24,6 +24,7 @@ import com.android.systemui.qs.tileimpl.QSFactoryImpl;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.qs.tiles.AirplaneModeTile;
 import com.android.systemui.qs.tiles.AlarmTile;
+import com.android.systemui.qs.tiles.BatteryShareTile;
 import com.android.systemui.qs.tiles.BluetoothTile;
 import com.android.systemui.qs.tiles.CameraToggleTile;
 import com.android.systemui.qs.tiles.CastTile;
@@ -43,11 +44,11 @@ import com.android.systemui.qs.tiles.QuickAccessWalletTile;
 import com.android.systemui.qs.tiles.ReduceBrightColorsTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
+import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.UiModeNightTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
-import com.android.systemui.qs.tiles.PowerShareTile;
 import com.android.systemui.util.leak.GarbageMonitor;
 
 import org.pixelexperience.systemui.qs.tiles.BatterySaverTileGoogle;
@@ -61,6 +62,7 @@ import dagger.Lazy;
 @SysUISingleton
 public class QSFactoryImplGoogle extends QSFactoryImpl {
     private final Provider<BatterySaverTileGoogle> mBatterySaverTileGoogleProvider;
+    private final Provider<BatteryShareTile> mBatteryShareTileProvider;
     private final Provider<ReverseChargingTile> mReverseChargingTileProvider;
 
     @Inject
@@ -82,6 +84,7 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
             Provider<HotspotTile> hotspotTileProvider,
             Provider<UserTile> userTileProvider,
             Provider<BatterySaverTileGoogle> batterySaverTileGoogleProvider,
+            Provider<BatteryShareTile> batteryShareTileProvider,
             Provider<DataSaverTile> dataSaverTileProvider,
             Provider<NightDisplayTile> nightDisplayTileProvider,
             Provider<NfcTile> nfcTileProvider,
@@ -95,7 +98,7 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
             Provider<AlarmTile> alarmTileProvider,
             Provider<QuickAccessWalletTile> quickAccessWalletTileProvider,
             Provider<ReverseChargingTile> reverseChargingTileProvider,
-            Provider<PowerShareTile> powerShareTileProvider) {
+            Provider<ScreenshotTile> screenshotTileProvider) {
         super(qsHostLazy,
                 customTileBuilderProvider,
                 wifiTileProvider,
@@ -113,6 +116,7 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
                 hotspotTileProvider,
                 userTileProvider,
                 () -> batterySaverTileGoogleProvider.get(),
+                batteryShareTileProvider,
                 dataSaverTileProvider,
                 nightDisplayTileProvider,
                 nfcTileProvider,
@@ -125,9 +129,10 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
                 deviceControlsTileProvider,
                 alarmTileProvider,
                 quickAccessWalletTileProvider,
-                powerShareTileProvider);
+                screenshotTileProvider);
         mReverseChargingTileProvider = reverseChargingTileProvider;
         mBatterySaverTileGoogleProvider = batterySaverTileGoogleProvider;
+        mBatteryShareTileProvider = batteryShareTileProvider;
     }
 
     @Override
@@ -144,6 +149,8 @@ public class QSFactoryImplGoogle extends QSFactoryImpl {
             return mReverseChargingTileProvider.get();
         } else if (str.equals("battery")) {
             return mBatterySaverTileGoogleProvider.get();
+        } else if (str.equals("batteryShare")) {
+            return mBatteryShareTileProvider.get();
         }
         return null;
     }
